@@ -1,6 +1,7 @@
 package com.example.lab06;
 
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -61,6 +62,13 @@ public class Main extends Application {
                 new PieChart.Data(ageGroups[4], purchasesByAgeGroup[4]),
                 new PieChart.Data(ageGroups[5], purchasesByAgeGroup[5]));
         final PieChart pieChart = new PieChart(pieChartData);
+        int i = 0;
+        for (PieChart.Data data : pieChartData) {
+            String colorString = "rgb(" + pieColours[i].getRed() * 255 + "," + pieColours[i].getGreen() * 255 + "," + pieColours[i].getBlue() * 255 + ");";
+            data.getNode().setStyle("-fx-pie-color: " + colorString + ";");
+            i++;
+        }
+        pieChart.setLegendVisible(false);
         pieChart.setTitle("Purchases By Age Group");
         pieChart.setLayoutX(500);
         ((Group) scene.getRoot()).getChildren().add(pieChart);
@@ -69,6 +77,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
     }
+
     private static String[] ageGroups = {
             "18-25", "26-35", "36-45", "46-55", "56-65", "65+"
     };
